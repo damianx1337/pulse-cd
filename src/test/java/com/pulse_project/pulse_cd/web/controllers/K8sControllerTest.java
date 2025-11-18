@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles(value = "test")
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DemoControllerTest {
+public class K8sControllerTest {
 	
 	private static ClientAndServer mockServer;
     private static int mockServerPort = 1080;
