@@ -1,6 +1,7 @@
-package com.pulse_project.pulse_cd.web.controllers;
+package com.pulse_project.pulse_cd.web.controllers.k8s;
 
-import com.pulse_project.pulse_cd.infrastructure.adapters.k8s.K8sService;
+
+import com.pulse_project.pulse_cd.infrastructure.adapters.k8s.K8sDeploymentService;
 import io.kubernetes.client.openapi.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,22 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/k8s/api")
-public class K8sController {
-    private final K8sService k8sService;
+public class K8sDeploymentController {
+    private final K8sDeploymentService k8sDeploymentService;
 
-    public K8sController(K8sService k8sService){
-        this.k8sService = k8sService;
+    public K8sDeploymentController(K8sDeploymentService k8sDeploymentService){
+        this.k8sDeploymentService = k8sDeploymentService;
     }
 
     /**
-     * GET /pods?namespace=default
-     * If namespace omitted, returns pods from all namespaces.
+     * GET /deployments?namespace=default
+     * If namespace omitted, returns deployments from all namespaces.
      */
-	@GetMapping("/pods")
+    @GetMapping("/deployments")
     public ResponseEntity<String> getPods(@RequestParam(required = false) String namespace) {
         String podName;
         try {
-            podName = k8sService.getK8sPods();
+            podName = k8sDeploymentService.getK8sDeployments();
             return ResponseEntity.ok(podName);
         } catch (ApiException e) {
             throw new RuntimeException(e);
