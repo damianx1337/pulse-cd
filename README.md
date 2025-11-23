@@ -1,6 +1,9 @@
 # pulse-cd
 Pulse CD
 
+## Requirements
+* Java _21_
+
 ## Testing
 
 *List GitHub Repository Branch-Metadata*
