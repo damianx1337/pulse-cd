@@ -1,4 +1,4 @@
-package com.pulse_project.pulse_cd.web.controllers;
+package com.pulse_project.pulse_cd.web.controllers.github;
 
 import com.pulse_project.pulse_cd.domain.models.branch.BranchInfo;
 import com.pulse_project.pulse_cd.infrastructure.adapters.github.GitHubService;
