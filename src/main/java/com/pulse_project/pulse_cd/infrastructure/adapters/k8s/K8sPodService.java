@@ -60,9 +60,9 @@ public class K8sPodService {
         if (checkContainerListEmpty(k8sPod)) {
 //            int containerCount = countContainers(k8sPod);
 //            List<V1Container> containers = Collections.singletonList(k8sPod.getSpec().getContainers().get(0));
-            log.info("BEFORE SET: {}", k8sPod.getSpec().getContainers().getFirst().getImage());
+            log.debug("CURRENT Container Image: {}", k8sPod.getSpec().getContainers().getFirst().getImage());
             k8sPod.getSpec().getContainers().getFirst().setImage("registry.k8s.io/coredns/coredns:v1.12.0");
-            log.info("AFTER SET: {}",k8sPod.getSpec().getContainers().getFirst().getImage());
+            log.debug("NEW Container Image: {}",k8sPod.getSpec().getContainers().getFirst().getImage());
             return k8sPod.getSpec().getContainers().getFirst().getName();
         }
         return "NO CONTAINER NAME FOUND!";
