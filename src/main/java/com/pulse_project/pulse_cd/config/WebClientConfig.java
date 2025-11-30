@@ -9,13 +9,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Configuration
-public class GithubClientConfiguration {
-    @Value(value = "${github.api-base:https://api.github.com}")
-    private String githubApiBase;
+public class WebClientConfig {
 
-    @Value("${github.token:}")
-    private String githubToken;
+    @Bean
+    public WebClient.Builder webClientBuilder(){
+        return WebClient.builder();
+    }
 
+    /*
     @Bean
     public WebClient githubWebClient(){
         WebClient.Builder builder = WebClient.builder()
@@ -33,4 +34,6 @@ public class GithubClientConfiguration {
 
         return builder.build();
     }
+
+     */
 }

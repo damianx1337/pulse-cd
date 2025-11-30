@@ -3,8 +3,10 @@ package com.pulse_project.pulse_cd.infrastructure.adapters.github;
 import com.pulse_project.pulse_cd.domain.models.branch.BranchInfo;
 import com.pulse_project.pulse_cd.domain.models.branch.BranchResponse;
 import com.pulse_project.pulse_cd.domain.models.branch.CommitDetailResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.http.HttpHeaders;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -15,10 +17,16 @@ import java.util.List;
 
 @Service
 public class GitHubService {
+
     private final WebClient webClient;
 
-    public GitHubService (WebClient webClient){
-        this.webClient = webClient;
+    public GitHubService (WebClient.Builder webClientBuilder,
+                          @Value(value = "${github.api-base:https://api.github.com}") String githubApiBase,
+                          @Value("${github.token:}") String githubToken){
+        this.webClient = webClientBuilder
+                .baseUrl(githubApiBase)
+                .defaultHeader(HttpHeaders.ACCEPT, "application/vnd.github+json")
+                .build();
     }
 
     /**
