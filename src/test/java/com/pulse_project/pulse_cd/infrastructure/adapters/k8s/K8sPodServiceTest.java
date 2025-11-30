@@ -7,6 +7,7 @@ import io.kubernetes.client.openapi.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.reset;
@@ -29,6 +31,9 @@ public class K8sPodServiceTest {
 
     @Autowired
     private K8sPodService k8sPodService;
+
+    @Mock
+    private CoreV1Api.APIlistPodForAllNamespacesRequest apIlistPodForAllNamespacesRequest;
 
     @BeforeEach
     public void setup(){
@@ -51,9 +56,6 @@ public class K8sPodServiceTest {
         V1Pod p2 = makePod("p2", "default", "busybox:1");
         V1PodList list = new V1PodList().items(List.of(p1,p2));
 
-//        System.out.println("TESTTTTT" + list.getItems());
-
-        assertNotNull(coreV1Api);
         /*
         when(coreV1Api.listNamespacedPod(
                 eq("default")
@@ -62,8 +64,12 @@ public class K8sPodServiceTest {
                 
          */
 
-//        when(coreV1Api.listPodForAllNamespaces().execute()).thenReturn(list);
+        when(coreV1Api.listPodForAllNamespaces()).thenReturn(apIlistPodForAllNamespacesRequest);
+        when(apIlistPodForAllNamespacesRequest.execute()).thenReturn(list);
 
-//        String pods = k8sPodService.getK8sPods();
+        String pods = k8sPodService.getK8sPods();
+        assertNotNull(pods);
+        assertEquals("p1", pods);
+//        assertEquals("p1", pods.get(0).getMetadata().getName());
     }
 }
