@@ -5,6 +5,7 @@ import com.pulse_project.pulse_cd.domain.models.containerimage.TagInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -62,6 +63,10 @@ public class DockerHubService {
                     }
                 })
                 .retrieve()
+                .onStatus(
+                        HttpStatus.INTERNAL_SERVER_ERROR::equals,
+                        response -> response.bodyToMono(String.class).map(Exception::new)
+                )
                 .bodyToMono(DockerTagsPage.class)
                 // Retry a few times with backoff for transient errors (not for 4xx)
                 .retryWhen(Retry.backoff(3, Duration.ofSeconds(1))

@@ -1,6 +1,7 @@
-/*package com.pulse_project.pulse_cd.infrastructure.adapters.k8s;
+package com.pulse_project.pulse_cd.infrastructure.adapters.k8s;
 
-
+import com.pulse_project.pulse_cd.config.MockK8sClientConfig;
+import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,20 +14,26 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { K8sPodService.class })
+@ContextConfiguration(classes = { MockK8sClientConfig.class, K8sPodService.class })
 public class K8sPodServiceTest {
+
     @Autowired
     private CoreV1Api coreV1Api;
+
     @Autowired
     private K8sPodService k8sPodService;
 
     @BeforeEach
     public void setup(){
         reset(coreV1Api);
+        assertNotNull(coreV1Api);
     }
 
     private V1Pod makePod(String name, String namespace, String image) {
@@ -39,9 +46,24 @@ public class K8sPodServiceTest {
     }
 
     @Test
-    public void testListPods_returnsPodsFromMock() {
+    public void testListPods_returnsPodsFromMock() throws ApiException {
         V1Pod p1 = makePod("p1", "default", "nginx:1");
-        V1PodList list = new V1PodList().items(List.of(p1));
+        V1Pod p2 = makePod("p2", "default", "busybox:1");
+        V1PodList list = new V1PodList().items(List.of(p1,p2));
+
+//        System.out.println("TESTTTTT" + list.getItems());
+
+        assertNotNull(coreV1Api);
+        /*
+        when(coreV1Api.listNamespacedPod(
+                eq("default")
+        ).execute())
+                .thenReturn(list);
+                
+         */
+
+//        when(coreV1Api.listPodForAllNamespaces().execute()).thenReturn(list);
+
+//        String pods = k8sPodService.getK8sPods();
     }
 }
-*/
