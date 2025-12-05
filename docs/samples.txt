@@ -1,0 +1,30 @@
+curl "http://localhost:8080/api/repos/spring-projects/spring-boot/branches?activeWithinDays=7"
+
+[{"name":"main","sha":"1c637d86928ae480d4d61d0fd2e43319fb03b724","lastCommitDate":"2025-12-02T15:59:03Z"},{"name":"docs-build","sha":"d6c12e5b89787857e3b43a1ee0267368ca556970","lastCommitDate":"2025-12-02T01:49:25Z"},{"name":"3.5.x","sha":"5cc1a939690d5d4cfb6b19ee9782af5a19da7456","lastCommitDate":"2025-12-02T09:47:00Z"},{"name":"3.4.x","sha":"3f6c70031a18b99cd4c79defe3878f22a7508703","lastCommitDate":"2025-12-02T09:46:54Z"}]
+
+
+curl "http://localhost:8080/api/repos/damianx1337/pulse-cd/branches?activeWithinDays=10"      
+
+[{"name":"main","sha":"1a71d91ed43e1ba83b75639ab24f1868a800de4c","lastCommitDate":"2025-12-02T22:37:06Z"},{"name":"add-configmap-service","sha":"b185c450378721ae4f4cac25540a6360ec59bc12","lastCommitDate":"2025-12-02T23:00:02Z"}]
+
+
+curl -N "http://localhost:8080/api/docker/library/ubuntu/tags?page_size=3"
+
+{"name":"resolute-20251101","lastUpdated":"2025-11-15T12:04:50.077907Z","raw":{"name":"resolute-20251101","last_updated":"2025-11-15T12:04:50.077907Z"}}
+{"name":"resolute","lastUpdated":"2025-11-15T12:04:47.505645Z","raw":{"name":"resolute","last_updated":"2025-11-15T12:04:47.505645Z"}}
+{"name":"noble-20251013","lastUpdated":"2025-11-15T12:04:41.443723Z","raw":{"name":"noble-20251013","last_updated":"2025-11-15T12:04:41.443723Z"}}
+{"name":"latest","lastUpdated":"2025-11-15T12:04:36.2896Z","raw":{"name":"latest","last_updated":"2025-11-15T12:04:36.2896Z"}}
+{"name":"noble","lastUpdated":"2025-11-15T12:04:38.934373Z","raw":{"name":"noble","last_updated":"2025-11-15T12:04:38.934373Z"}}
+{"name":"jammy-20251013","lastUpdated":"2025-11-15T12:04:33.598665Z","raw":{"name":"jammy-20251013","last_updated":"2025-11-15T12:04:33.598665Z"}}
+{"name":"jammy","lastUpdated":"2025-11-15T12:04:30.430635Z","raw":{"name":"jammy","last_updated":"2025-11-15T12:04:30.430635Z"}}
+{"name":"devel","lastUpdated":"2025-11-15T12:04:27.586029Z","raw":{"name":"devel","last_updated":"2025-11-15T12:04:27.586029Z"}}
+{"name":"26.04","lastUpdated":"2025-11-15T12:04:23.508018Z","raw":{"name":"26.04","last_updated":"2025-11-15T12:04:23.508018Z"}}
+{"name":"24.04","lastUpdated":"2025-11-15T12:04:16.756382Z","raw":{"name":"24.04","last_updated":"2025-11-15T12:04:16.756382Z"}}
+{"name":"22.04","lastUpdated":"2025-11-15T12:04:11.882869Z","raw":{"name":"22.04","last_updated":"2025-11-15T12:04:11.882869Z"}}
+{"name":"rolling","lastUpdated":"2025-10-13T08:04:46.17423Z","raw":{"name":"rolling","last_updated":"2025-10-13T08:04:46.17423Z"}}
+{"name":"questing-20251007","lastUpdated":"2025-10-13T08:04:43.566754Z","raw":{"name":"questing-20251007","last_updated":"2025-10-13T08:04:43.566754Z"}}
+{"name":"questing","lastUpdated":"2025-10-13T08:04:40.986321Z","raw":{"name":"questing","last_updated":"2025-10-13T08:04:40.986321Z"}}
+{"name":"plucky-20251001","lastUpdated":"2025-10-13T08:04:38.151382Z","raw":{"name":"plucky-20251001","last_updated":"2025-10-13T08:04:38.151382Z"}}
+{"name":"plucky","lastUpdated":"2025-10-13T08:04:35.182273Z","raw":{"name":"plucky","last_updated":"2025-10-13T08:04:35.182273Z"}}
+{"name":"noble-20251001","lastUpdated":"2025-10-13T08:04:32.525158Z","raw":{"name":"noble-20251001","last_updated":"2025-10-13T08:04:32.525158Z"}}
+{"name":"25.10","lastUpdated":"2025-10-13T08:04:22.62911Z","raw":{"name":"25.10","last_updated":"2025-10-13T08:04:22.62911Z"}}
