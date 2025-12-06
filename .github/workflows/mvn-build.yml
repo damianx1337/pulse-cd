@@ -4,8 +4,8 @@ on:
   push:
     branches: '*'
 #    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+#  pull_request:
+#    branches: [ main, master ]
 
 jobs:
   build:
@@ -45,10 +45,10 @@ jobs:
         env:
           MAVEN_OPTS: -Xmx1024m
 
-      - name: Build package (skip tests)
-        run: ./mvnw -B -ntp package -DskipTests
-        env:
-          MAVEN_OPTS: -Xmx1024m
+#      - name: Build package (skip tests)
+#        run: ./mvnw -B -ntp package -DskipTests
+#        env:
+#          MAVEN_OPTS: -Xmx1024m
 
       # Optional: upload build artifact (uncomment if you want)
       # - name: Upload artifact
