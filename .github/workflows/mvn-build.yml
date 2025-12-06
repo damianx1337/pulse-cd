@@ -2,7 +2,8 @@ name: Java CI (Maven wrapper)
 
 on:
   push:
-    branches: [ main, master ]
+    branches: '*'
+#    branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
 
