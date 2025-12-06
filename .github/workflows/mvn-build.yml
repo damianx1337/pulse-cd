@@ -14,7 +14,7 @@ jobs:
     # Optional: test across multiple JDKs. Edit or remove values as needed.
     strategy:
       matrix:
-        java-version: [ '11', '17' ]
+        java-version: [ '21', '25' ]
 
     steps:
       - name: Checkout repository
