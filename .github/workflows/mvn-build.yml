@@ -1,0 +1,59 @@
+name: Java CI (Maven wrapper)
+
+on:
+  push:
+    branches: '*'
+#    branches: [ main, master ]
+#  pull_request:
+#    branches: [ main, master ]
+
+jobs:
+  build:
+    name: Build & Test with Maven Wrapper
+    runs-on: ubuntu-latest
+
+    # Optional: test across multiple JDKs. Edit or remove values as needed.
+    strategy:
+      matrix:
+        java-version: [ '21' ]
+#        java-version: [ '21', '25' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+
+      - name: Cache Maven local repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ matrix.java-version }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-${{ matrix.java-version }}-
+
+      - name: Make mvnw executable
+        run: chmod +x ./mvnw
+
+      - name: Run tests
+        # -B = batch mode for CI; -ntp disables transfer progress to reduce log noise
+        run: ./mvnw -B -ntp test
+        env:
+          MAVEN_OPTS: -Xmx1024m
+
+#      - name: Build package (skip tests)
+#        run: ./mvnw -B -ntp package -DskipTests
+#        env:
+#          MAVEN_OPTS: -Xmx1024m
+
+      # Optional: upload build artifact (uncomment if you want)
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: my-app-jar
+      #     path: target/*.jar
+
